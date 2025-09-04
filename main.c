@@ -44,7 +44,7 @@ void Search_by_title(char title[100][100], char author[100][100], float price[10
         return;
     }
     
-    printf("ESearch for a book by its title : ");
+    printf("Search for a book by its title : ");
     scanf("%s", Search);
     for(int i = 0; i < count; i++){
         int c = strcmp(Search, title[i]);
@@ -54,8 +54,50 @@ void Search_by_title(char title[100][100], char author[100][100], float price[10
     }
 }
 
-// void Update_quantity( int Quantity[20][100], int count)
+void Update_quantity(char title[100][100], char author[100][100], float price[100], int Quantity[100], int count){
+    int B_update;
+    int updated;
+    if (count == 0) {
+        printf("No books available.\n");
+        return;
+    }
+    printf("\nAvailable Books:\n");
+    for (int i = 0; i < count; i++) {
+        printf("%d. %s by %s , price of %0.2f$, and the Quantity %d\n", i + 1, title[i], author[i], price[i], Quantity[i]);
+    }
+    printf("Update quntity of book : ");
+    scanf("%d", &B_update);
+    printf("Enter updated value : ");
+    scanf("%d", &updated);
+    Quantity[B_update - 1] = updated;
+    printf("Book quantity updated succefully !");
+}
 
+int Delete_book(char title[100][100], char author[100][100], float price[100], int Quantity[100], int count){
+    int B_delete = 0;
+    if (count == 0) {
+        printf("No books available.\n");
+        // return;
+    }
+    printf("\nAvailable Books:\n");
+    for (int i = 0; i < count; i++) {
+        printf("%d. %s by %s , price of %0.2f$, and the Quantity %d\n", i + 1, title[i], author[i], price[i], Quantity[i]);
+    }
+    printf("Delete book : ");
+    scanf("%d", &B_delete);
+    for(int i = B_delete - 1; i < count - 1; i++){
+        strcpy(title[i], title[i + 1]);
+        strcpy(author[i], author[i + 1]);
+        price[i] = price[i + 1];
+        Quantity[i] = price[i + 1];
+    }
+    return count - 1;
+    printf("Deleted siccefully !");
+}
+
+void total_number(int count){
+    
+}
 
 int main(){
     int choise;
@@ -91,7 +133,13 @@ int main(){
                 Search_by_title(title, Author, price, Quantity , count);
                 break;
             case 4:
+                Update_quantity(title, Author, price, Quantity , count);
                 break;
+            case 5:
+                count = (Delete_book(title, Author, price, Quantity , count));
+                break;
+            case 6: 
+
         }
     }
 
