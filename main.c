@@ -7,7 +7,7 @@ int add_book(char title[100][100], char author[100][100], float price[100], int 
         return count;
     }
 
-    printf("Enter book title : ");
+    printf("\nEnter book title : ");
     scanf("%s", title[count]);
 
     printf("Enter author name : ");
@@ -20,8 +20,6 @@ int add_book(char title[100][100], char author[100][100], float price[100], int 
     scanf("%d", &Quantity[count]);
 
     count++;
-    printf("Book added succecfully ! Now total = %d\n", count);
-
     return count;
 }
 
@@ -77,7 +75,7 @@ int Delete_book(char title[100][100], char author[100][100], float price[100], i
     int B_delete = 0;
     if (count == 0) {
         printf("No books available.\n");
-        // return;
+        return 0; 
     }
     printf("\nAvailable Books:\n");
     for (int i = 0; i < count; i++) {
@@ -91,12 +89,12 @@ int Delete_book(char title[100][100], char author[100][100], float price[100], i
         price[i] = price[i + 1];
         Quantity[i] = price[i + 1];
     }
-    return count - 1;
     printf("Deleted siccefully !");
+    return count - 1;
 }
 
 void total_number(int count){
-    
+    printf("Totale number of books in stock is : %d", count);
 }
 
 int main(){
@@ -105,8 +103,10 @@ int main(){
     char title[100][100], Author[100][100];
     float price[100];
     int Quantity[100];
-    while(1){
-        printf("\n//////////// Menu Book Store ///////////////////\n");
+    int r = 1;
+
+    while(r){
+        printf("\n//////////// Menu Book Store /////////////////////\n");
         printf("//////// 1 . Add a book to stock. ////////////////\n");
         printf("////// 2 . View all available books. /////////////\n");
         printf("//// 3 . Search for a book by its title. /////////\n");
@@ -118,6 +118,7 @@ int main(){
         
         printf("Enter your choise : ");
         scanf("%d", &choise);
+
         if(choise < 0 || choise > 7){
             printf("\nwrong try (0 - 6) !\n");
         }
@@ -139,7 +140,11 @@ int main(){
                 count = (Delete_book(title, Author, price, Quantity , count));
                 break;
             case 6: 
-
+                total_number(count);
+                break;
+            case 0:
+                r = 0;
+                break;
         }
     }
 
